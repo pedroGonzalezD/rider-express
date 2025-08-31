@@ -1,0 +1,24 @@
+:root {
+  --primary-color: #dc2626;
+  --primary-color-trans: #dc26264d;
+  --primary-foreground: #ffffff;
+  --secondary-color: #f97316;
+  --secondary-foreground: #ffffff;
+  --foreground: #0f172a;
+  --border: #e2e8f0;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #25d366;
+  --accent-foreground: #ffffff;
+  --white: #ffffff;
+  --background: #ffffff;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+}
+
+[data-theme="dark"] {
+  --primary-color: #ff6666;
+  --secondary-color: #8888ff;
+  --background-color: #121212;
+  --text-color: #f1f1f1;
+}

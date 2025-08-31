@@ -1,0 +1,193 @@
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  font-weight: 700;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-weight: 500;
+
+  &:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0px 2px var(--primary-color-trans);
+  }
+
+  &::placeholder {
+    font-weight: 400;
+  }
+}
+
+.input[type="time"] {
+  width: 120px;
+  padding: 8px 10px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: -5px;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-color);
+  }
+
+  &::-webkit-datetime-edit-fields-wrapper {
+    display: flex;
+    gap: 2px;
+  }
+  &::-webkit-calendar-picker-indicator {
+    filter: invert(0.5);
+    cursor: pointer;
+  }
+  &::-webkit-clear-button,
+  &::-webkit-inner-spin-button {
+    display: none;
+  }
+}
+
+.labelTime {
+  font-weight: 500;
+  font-size: 14px;
+  width: 120px;
+}
+
+.select[multiple] {
+  width: 100%;
+  min-height: 120px;
+  padding: 8px 10px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #fff;
+  cursor: pointer;
+  margin-bottom: 8px;
+
+  &:focus {
+    outline: none;
+  }
+
+  option {
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 2px;
+
+    &:checked {
+      color: white;
+    }
+
+    &:focus {
+      background-color: var(--primary-color);
+      color: white;
+    }
+  }
+}
+
+.add {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-weight: 600;
+  background-color: var(--accent);
+  padding: 4px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #128c7e;
+  }
+}
+
+.fileUpload input[type="file"] {
+  display: none;
+}
+
+.fileUpload label {
+  margin-top: 1rem;
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  padding: 10px 16px;
+  background: var(--accent);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+  font-weight: bold;
+}
+
+.fileUpload label:hover {
+  background: var(--primary-hover, #004aad);
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  align-items: center;
+  font-weight: 600;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: rgb(182, 9, 9);
+  }
+}
+
+.addF {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-weight: 600;
+  background-color: var(--accent);
+  padding: 4px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  justify-content: center;
+  width: 100%;
+  padding: 12px;
+  font-weight: 700;
+  margin-top: 1rem;
+
+  &:hover {
+    background-color: #128c7e;
+  }
+}
+
+.actions {
+  width: 100%;
+  button {
+    width: 100%;
+    padding: 12px;
+    justify-content: center;
+  }
+}
+
+.label {
+  margin-top: 1rem;
+}
+
+.emoji {
+  padding: 6px 12px;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}

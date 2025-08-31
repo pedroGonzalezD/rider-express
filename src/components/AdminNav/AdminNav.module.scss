@@ -1,0 +1,46 @@
+.nav {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 1rem;
+
+  & .li:first-child {
+    border-radius: 10px 0 0 10px;
+    overflow: hidden;
+  }
+
+  & .li:last-child {
+    border-radius: 0 10px 10px 0;
+    overflow: hidden;
+  }
+}
+
+.ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.li {
+  width: 100%;
+}
+.a {
+  text-decoration: none;
+  font-weight: 600;
+  color: inherit;
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 8px 12px;
+
+  &:visited {
+    color: inherit;
+  }
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+
+.a.isActive {
+  background-color: black;
+  color: white;
+}

@@ -1,0 +1,25 @@
+.mapContainer {
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  padding: 0 1rem;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+// @media (min-width: 768px) {
+//   .mapContainer {
+//     flex: 1;
+//     height: 400px;
+//     margin-bottom: 0;
+//     margin-left: 2rem;
+//     max-width: 500px;
+//   }
+// }
+
+// @media (min-width: 1200px) {
+//   .mapContainer {
+//     max-width: 600px;
+//     height: 500px;
+//   }
+// }

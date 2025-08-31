@@ -1,0 +1,129 @@
+.ul {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minMax(120px, 1fr));
+  gap: 12px;
+  justify-content: center;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.add {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-weight: 600;
+  background-color: var(--accent);
+  padding: 4px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #128c7e;
+  }
+}
+
+.cont {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  align-items: center;
+}
+
+.li {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  border: 1px solid var(--muted-foreground);
+  border-radius: 10px;
+  transition: all 0.2s;
+  gap: 8px;
+  overflow: hidden;
+  min-height: 120px;
+  align-items: center;
+  justify-content: space-between;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transform: translateY(-2px);
+  }
+
+  span {
+    font-size: 24px;
+  }
+
+  p {
+    font-weight: 600;
+  }
+
+  button {
+    font-size: 24px;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-weight: 500;
+
+  &:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0px 2px var(--primary-color-trans);
+  }
+
+  &::placeholder {
+    font-weight: 400;
+  }
+}
+
+.emoji {
+  padding: 6px 12px;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.actions {
+  width: 100%;
+  button {
+    width: 100%;
+    padding: 12px;
+    justify-content: center;
+  }
+}
+
+.deleteButton {
+  margin-top: 1rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 10px 24px !important;
+  color: var(--primary-color);
+  font-weight: 600;
+  background-color: rgba(255, 0, 0, 0.092);
+  cursor: pointer;
+}
+
+.label {
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .add {
+    padding: 12px 32px;
+    font-size: 20px;
+  }
+}

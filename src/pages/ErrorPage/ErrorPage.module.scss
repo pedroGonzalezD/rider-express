@@ -1,0 +1,30 @@
+.errorPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  text-align: center;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin: 0.5rem 0;
+  }
+
+  .homeLink {
+    margin-top: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #5e5ef8;
+    color: white;
+    border-radius: 0.5rem;
+    text-decoration: none;
+
+    &:hover {
+      background-color: #4747c8;
+    }
+  }
+}
