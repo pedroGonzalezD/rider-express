@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useLoader } from "../../context/LoaderContext";
 import { RiResetLeftFill } from "react-icons/ri";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Grid, Pagination, Navigation } from 'swiper/modules';
+import { Grid, Pagination, Navigation, Virtual } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/pagination';
@@ -28,30 +28,32 @@ export default function Home() {
       setFilters(prev => ({ ...prev, q: query }));
     }, 300);
     return () => clearTimeout(timer);
-  }, [query]);
+  }, [query, setFilters]);
 
-  const handleCategoryClick = (catName) => {
-    setFilters(prev => {
-      const selected = Array.isArray(prev.category) ? prev.category : [];
-      const newCategories = selected.includes(catName)
-        ? selected.filter(c => c !== catName)
-        : [...selected, catName];
-      return { ...prev, category: newCategories };
-    });
-  };
+const handleCategoryClick = (catId) => {
+  setFilters(prev => {
+    const selected = Array.isArray(prev.category) ? prev.category : [];
+    const newCategories = selected.includes(catId)
+      ? selected.filter(c => c !== catId)
+      : [...selected, catId];
+    return { ...prev, category: newCategories };
+  });
+};
+
 
   const filteredBusinesses = businesses.filter(b => {
+    const q = (filters.q || "").toLowerCase();
     const matchesQuery =
-      !filters.q ||
-      b.name.toLowerCase().includes(filters.q.toLowerCase()) ||
-      b.address?.toLowerCase().includes(filters.q.toLowerCase());
+      !q ||
+      b.name?.toLowerCase().includes(q) ||
+      b.address?.toLowerCase().includes(q);
 
     const matchesCategory =
-      !filters.category || filters.category.length === 0
-        ? true
-        : Array.isArray(filters.category)
-          ? filters.category.some(cat => b.categories?.includes(cat))
-          : b.categories?.includes(filters.category);
+  !filters.category || (Array.isArray(filters.category) && filters.category.length === 0)
+    ? true
+    : Array.isArray(filters.category)
+      ? filters.category.some(cat => b.categories?.includes(cat))
+      : b.categories?.includes(filters.category);
 
     return matchesQuery && matchesCategory;
   });
@@ -79,35 +81,36 @@ export default function Home() {
             </button>
           </div>
           <div className={styles.slideContainer}>
-          {categories?.length > 0 ? (
-            <Swiper
-              spaceBetween={10}
-              modules={[Grid, Pagination, Navigation]}
-              pagination={{ clickable: true }}
-              navigation={true}
-              grid={{ rows: 2, fill: "row" }}
-              slidesPerView="auto"
-              className={styles.categoriesSlider}
-            >
-              {categories.map(cat => (
-                <SwiperSlide key={cat.id} className={styles.swiperSlide}>
-                  <CategoryCard
-                    category={cat}
-                    selected={
+            {categories?.length > 0 ? (
+              <Swiper
+                spaceBetween={10}
+                modules={[Grid, Pagination, Navigation, Virtual]}
+                pagination={{ clickable: true }}
+                navigation
+                grid={{ rows: 2, fill: "row" }}
+                slidesPerView="auto"
+                className={styles.categoriesSlider}
+                loop={false}
+              >
+                {categories.map(cat => (
+                  <SwiperSlide key={cat.id} className={styles.swiperSlide}>
+                    <CategoryCard
+                      category={cat}
+                      selected={
                       Array.isArray(filters.category)
-                        ? filters.category.includes(cat.name)
-                        : filters.category === cat.name
-                    }
-                    onClick={() => handleCategoryClick(cat.name)}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          ) : (
-            <p>No hay categorías disponibles.</p>
-          )}
+                        ? filters.category.includes(cat.id)
+                        : filters.category === cat.id
+                      }
+                      onClick={() => handleCategoryClick(cat.id)}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            ) : (
+              <p>No hay categorías disponibles.</p>
+            )}
+          </div>
         </div>
-      </div>
       </section>
 
       <section className={styles.business}>
@@ -117,7 +120,9 @@ export default function Home() {
           ) : error ? (
             <p className={styles.error}>{error}</p>
           ) : filteredBusinesses.length > 0 ? (
-            filteredBusinesses.map(b => <BusinessCard key={b.id} business={b} />)
+            filteredBusinesses.map(b => (
+              <BusinessCard key={b.id} business={b} />
+            ))
           ) : (
             <p>No se encontraron negocios.</p>
           )}
@@ -131,7 +136,7 @@ export default function Home() {
       />
 
       <a
-        href="https://wa.me/+59895084521"
+        href="https://wa.me/+59895032424"
         target="_blank"
         rel="noopener noreferrer"
         className={styles.whatsappButton}

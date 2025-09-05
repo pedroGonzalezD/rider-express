@@ -51,7 +51,8 @@
 @media (min-width: 1024px) {
   .nav {
     all: unset;
-    display: block;
+    display: flex;
+    align-items: center;
   }
 
   .icon {
@@ -65,19 +66,19 @@
   .a {
     all: unset;
     font-size: 20px;
-    color: white;
+    color: var(--primary-color);
     font-weight: 600;
 
     &:active {
-      color: white;
+      color: var(--primary-color);
     }
 
     &:visited {
-      color: white;
+      color: var(--primary-color);
     }
 
     &:hover {
-      color: rgb(167, 167, 167);
+      color: rgb(151, 0, 0);
     }
   }
 }

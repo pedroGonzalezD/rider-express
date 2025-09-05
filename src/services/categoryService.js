@@ -1,5 +1,5 @@
 // services/categoryService.js
-import { db } from "../firebase";
+import { db } from "../firebase.js";
 import {
   collection,
   addDoc,

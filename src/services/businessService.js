@@ -1,5 +1,5 @@
 // services/businessService.js
-import { db, storage } from "../firebase";
+import { db } from "../firebase.js";
 import {
   collection,
   addDoc,
@@ -8,8 +8,7 @@ import {
   doc,
   getDocs,
 } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { uploadImg } from "../utils/cloudinary";
+import { uploadImg } from "../utils/cloudinary.js";
 
 export async function listBusinesses() {
   const snap = await getDocs(collection(db, "businesses"));
@@ -17,15 +16,24 @@ export async function listBusinesses() {
 }
 
 export async function createBusiness(data) {
-  let photoUrl = null;
+  // Permitimos que vengan Files o URLs ya existentes
+  let photoOriginalUrl = data.photoOriginalUrl || data.photoOriginal || null;
+  let photoCroppedUrl = data.photoCroppedUrl || data.photoCropped || null;
 
-  if (data.photo instanceof File) {
-    photoUrl = await uploadImg(data.photo);
+  if (data.photoOriginal instanceof File) {
+    photoOriginalUrl = await uploadImg(data.photoOriginal);
+  }
+  if (data.photoCropped instanceof File) {
+    photoCroppedUrl = await uploadImg(data.photoCropped);
   }
 
+  // Limpiamos campos temporales
+  const { photoOriginal, photoCropped, ...rest } = data;
+
   const businessData = {
-    ...data,
-    photo: photoUrl || null,
+    ...rest,
+    photoOriginalUrl: photoOriginalUrl || null,
+    photoCroppedUrl: photoCroppedUrl || null,
   };
 
   const refDoc = await addDoc(collection(db, "businesses"), businessData);
@@ -33,11 +41,20 @@ export async function createBusiness(data) {
 }
 
 export async function updateBusiness(id, patch) {
-  if (patch.photo instanceof File) {
-    patch.photo = await uploadImg(patch.photo);
+  const updatedPatch = { ...patch };
+
+  if (patch.photoOriginal instanceof File) {
+    updatedPatch.photoOriginalUrl = await uploadImg(patch.photoOriginal);
+  }
+  if (patch.photoCropped instanceof File) {
+    updatedPatch.photoCroppedUrl = await uploadImg(patch.photoCropped);
   }
 
-  await updateDoc(doc(db, "businesses", id), patch);
+  // No guardar los File crudos
+  delete updatedPatch.photoOriginal;
+  delete updatedPatch.photoCropped;
+
+  await updateDoc(doc(db, "businesses", id), updatedPatch);
 }
 
 export async function removeBusiness(id) {
