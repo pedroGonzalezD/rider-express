@@ -94,11 +94,11 @@ const AdminCategories = () => {
           <label>
             Nombre
             <input
-            className={styles.input}
+              className={styles.input}
               value={categoryForm.name}
               onChange={e => setCategoryForm({ ...categoryForm, name: e.target.value })}
               required
-              />
+            />
           </label>
           <label className={styles.label}>
         Icono</label>

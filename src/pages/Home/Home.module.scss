@@ -39,14 +39,44 @@
 
   &::placeholder {
     font-weight: 400;
+    // overflow: auto;
   }
 }
 
-.categoriesGrid {
-  display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(auto-fill, minMax(100px, 1fr));
-  gap: 10px;
+.slideContainer {
+  position: relative;
+}
+
+.swiperSlide {
+  width: 100px !important;
+}
+
+.categoriesSlider {
+  width: 90%;
+  position: static !important;
+}
+
+.cont {
+  display: flex;
+  justify-content: space-between;
+}
+
+.resetButton {
+  height: 40px;
+  border: none;
+  padding: 0 24px;
+  border-radius: 10px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.2s;
+  font-weight: 600;
+  border: 1px solid rgba(128, 128, 128, 0.235);
+
+  &:hover {
+    background: var(--primary-color);
+  }
 }
 
 .business {
@@ -109,7 +139,7 @@
     gap: 12px;
   }
 
-  .categoriesGrid {
-    grid-template-columns: repeat(auto-fill, minMax(120px, 1fr));
+  .swiperSlide {
+    width: 120px !important;
   }
 }

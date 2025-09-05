@@ -10,17 +10,18 @@
   transition: all 0.3s;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   min-height: 100px;
+  width: 100%;
 
   &:hover {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
-    background-color: var(--primary-color);
+    border-color: var(--primary-color);
   }
 }
 
 .card.selected {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  border-color: var(--primary-color);
+  background-color: var(--primary-color);
 }
 
 .icon {

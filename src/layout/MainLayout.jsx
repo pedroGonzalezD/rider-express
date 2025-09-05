@@ -13,7 +13,9 @@ const MainLayout = () => {
     {loading && <Loader />}
       <header className={styles.header}>
         <div className={styles.navContainer}>
-          <h1 className={styles.title}>Rider Express</h1>
+          <div className={styles.logoContainer}>
+            <img src="/logo.png" alt="Logo " />
+          </div>
           <Nav/>
         </div>
       </header>

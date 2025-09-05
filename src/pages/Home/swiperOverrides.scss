@@ -1,0 +1,34 @@
+.swiper-button-prev,
+.swiper-button-next {
+  color: #333;
+}
+
+.swiper-button-next {
+  transform: translateX(20px);
+  display: none;
+}
+
+.swiper-button-prev {
+  transform: translateX(-20px);
+  display: none;
+}
+
+.swiper-pagination {
+  transform: translateY(30px);
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--primary-color);
+}
+
+.swiper-wrapper {
+  display: flex;
+  justify-content: center; /* centra horizontalmente los slides */
+}
+
+@media (min-width: 1024px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: block;
+  }
+}
