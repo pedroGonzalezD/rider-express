@@ -52,7 +52,6 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    console.log(adBanner)
     if (adShownRef.current) return;
     if (banners.length > 0) {
       const adBanners = banners.filter((b) => b.isAdBanner);
@@ -188,7 +187,7 @@ export default function Home() {
         <div className={styles.list}>
             { businesses &&businesses.map((b) => <BusinessCard key={b.id} business={b} />)}
           {businesses?.length === 0 && (
-            <p>{t("common.noBusinesses")}</p>
+            <p>No hay negocios disponibles</p>
           )}
         </div>
 

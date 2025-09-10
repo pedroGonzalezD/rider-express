@@ -9,8 +9,9 @@ import Footer from '../components/Footer/Footer'
 const MainLayout = () => {
   const {loading} = useLoader()
   return (
+    <>
+      {loading && <Loader />}
     <div className={styles.pageContainer}>
-    {loading && <Loader />}
       <header className={styles.header}>
         <div className={styles.navContainer}>
           <div className={styles.logoContainer}>
@@ -24,6 +25,7 @@ const MainLayout = () => {
       </main>
       <Footer></Footer>
     </div>
+    </>
   )
 }
 
