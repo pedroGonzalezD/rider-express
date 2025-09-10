@@ -41,6 +41,8 @@
     "businessManage": "Gestión de Negocios",
     "login": "Acceder",
     "companyName": "Rider Express",
-    "allRightsReserved": "Todos los derechos reservados."
+    "allRightsReserved": "Todos los derechos reservados.",
+    "clear": "Limpiar",
+    "loadMore": "Cargar más"
   }
 }

@@ -81,7 +81,6 @@
   font-weight: 600;
 }
 
-/* Estado del negocio */
 .status {
   font-weight: 600;
   position: absolute;
@@ -108,7 +107,17 @@
   }
 }
 
-/* Teléfono */
+.featured {
+  background-color: var(--primary-color);
+  position: absolute;
+  padding: 0 12px;
+  top: 10px;
+  left: 10px;
+  border-radius: 20px;
+  color: white;
+  font-weight: 600;
+}
+
 .phone {
   font-size: 14px;
   font-weight: 600;

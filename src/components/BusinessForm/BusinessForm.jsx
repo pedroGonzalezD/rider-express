@@ -22,12 +22,13 @@ export default function BusinessForm({ onSubmit, categories, initialValues, addC
     contact: initialValues?.contact || "",
     hasWhatsApp: initialValues?.hasWhatsApp || false,
     hours: initialValues?.hours || { open: "", close: "" },
-    categories: initialValues?.categories || [], // ahora serán IDs
+    categories: initialValues?.categories || [],
     photoOriginalUrl: initialValues?.photoOriginalUrl || null,
     photoCroppedUrl: initialValues?.photoCroppedUrl || null,
     location: initialValues?.location || null,
     description: initialValues?.description || "",
     days: initialValues?.days || [],
+    isFeatured: initialValues?.isFeatured || false,
   });
 
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
@@ -100,7 +101,6 @@ export default function BusinessForm({ onSubmit, categories, initialValues, addC
   const handleCategorySave = async () => {
     if (!categoryForm.name) return;
 
-    // Evitar duplicados por nombre
     if (categories.some(c => c.name.toLowerCase() === categoryForm.name.toLowerCase())) {
       setError(`La categoría "${categoryForm.name}" ya existe.`);
       return;
@@ -145,10 +145,8 @@ export default function BusinessForm({ onSubmit, categories, initialValues, addC
     <>
       <form onSubmit={handleSubmit} className={styles.form}>
         <h2 className={styles.title}>
-          {initialValues ? "Editar negocio" : "Registrar negocio"}
         </h2>
 
-        {/* Campos básicos */}
         <div className={styles.grid}>
           <label className={styles.field}>
             <span>Nombre</span>
@@ -165,13 +163,20 @@ export default function BusinessForm({ onSubmit, categories, initialValues, addC
             <input name="contact" placeholder="Teléfono o WhatsApp" value={form.contact} onChange={handleChange} />
           </label>
         </div>
+        <label className={styles.fieldCheckbox}>
+        <input 
+          type="checkbox" 
+          checked={form.isFeatured} 
+          onChange={e => setForm(prev => ({ ...prev, isFeatured: e.target.checked }))}
+        />
+        Marcar como negocio destacado
+      </label>
 
         <label className={styles.fieldCheckbox}>
           <input type="checkbox" checked={form.hasWhatsApp} onChange={e => setForm(prev => ({ ...prev, hasWhatsApp: e.target.checked }))} />
           ¿Tiene WhatsApp?
         </label>
 
-        {/* Horarios */}
         <div className={styles.grid}>
           <label className={styles.field}>
             <span>Horario de apertura</span>
@@ -189,7 +194,6 @@ export default function BusinessForm({ onSubmit, categories, initialValues, addC
           <textarea name="description" placeholder="Breve descripción del negocio" value={form.description} onChange={handleChange} />
         </label>
 
-        {/* Días */}
         <div className={styles.section}>
           <span className={styles.sectionTitle}>Días de la semana</span>
           <div className={styles.days}>
@@ -207,13 +211,11 @@ export default function BusinessForm({ onSubmit, categories, initialValues, addC
           </div>
         </div>
 
-        {/* Ubicación */}
         <div className={styles.section}>
           <button type="button" className={styles.addF} onClick={() => setMapModalOpen(true)}>Seleccionar ubicación en el mapa</button>
           {form.location && <p className={styles.location}>📍 Lat {form.location[0].toFixed(5)}, Lng {form.location[1].toFixed(5)}</p>}
         </div>
 
-        {/* Categorías */}
         <div className={styles.section}>
           <label>Categorías</label>
           <select multiple value={form.categories} onChange={handleCategories}>
@@ -222,7 +224,6 @@ export default function BusinessForm({ onSubmit, categories, initialValues, addC
           <button type="button" className={styles.addF} onClick={() => setCategoryModalOpen(true)}>+ Nueva categoría</button>
         </div>
 
-        {/* Imagen */}
         <div className={styles.fileUpload}>
           <input type="file" id="photoUpload" accept="image/*" onChange={handleFileChange} />
           <label htmlFor="photoUpload">📷 Subir imagen</label>
@@ -240,7 +241,6 @@ export default function BusinessForm({ onSubmit, categories, initialValues, addC
         </button>
       </form>
 
-      {/* Modal Categoría */}
       <Modal isOpen={categoryModalOpen} onClose={() => { setEditingCategory(null); setCategoryModalOpen(false); setCategoryForm({ name: "", icon: "" }); }} title={editingCategory ? "Editar categoría" : "Nueva categoría"}>
         <form className={styles.formC} onSubmit={e => { e.preventDefault(); handleCategorySave(); }}>
           <label className={styles.fieldC}>
@@ -268,7 +268,6 @@ export default function BusinessForm({ onSubmit, categories, initialValues, addC
         </form>
       </Modal>
 
-      {/* Modal Mapa */}
       <Modal isOpen={mapModalOpen} onClose={() => setMapModalOpen(false)} title="Seleccionar ubicación">
         <MapContainer center={markerPosition} zoom={12} style={{ height: "400px", width: "100%" }}>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>

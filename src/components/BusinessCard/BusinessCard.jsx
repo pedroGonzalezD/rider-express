@@ -56,7 +56,7 @@ function isMobile() {
 }
 
 export default function BusinessCard({ business }) {
-  const { name, address, contact, hours, description, days, hasWhatsApp, photoOriginalUrl, photoCroppedUrl } = business;
+  const { name, address, contact, hours, description, days, hasWhatsApp, photoOriginalUrl, photoCroppedUrl, isFeatured } = business;
   const {categories} = useBusiness()
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
@@ -98,12 +98,14 @@ export default function BusinessCard({ business }) {
           <img src={getOptimizedImageUrl(photoUrl, 500)} alt={`Portada de ${name}`} />
         )}
       </div>
+      {isFeatured && (
+        <span className={styles.featured}>⭐ Destacado</span>
+      )}
       <div className={styles.info}>
         <h3 className={styles.title}>{name}</h3>
         {!!categories.length && (
   <div className={styles.categories}>
     {categories.map((cat) => {
-      // Si el id de esta categoría está en el array de business.categories
       if (business.categories.includes(cat.id)) {
         return (
           <span key={cat.id} className={styles.category}>

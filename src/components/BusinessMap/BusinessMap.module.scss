@@ -7,6 +7,55 @@
   margin: 0 auto;
 }
 
+// Popup normal
+.normalPopup {
+  background-color: white;
+  color: #333;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+  strong {
+    color: #111;
+  }
+}
+
+// Popup destacado
+.featuredPopup {
+  background-color: #ffe680; // amarillo claro para destacar
+  color: #222;
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+  strong {
+    color: #d97706; // naranja oscuro para el nombre
+  }
+
+  em {
+    font-style: normal;
+    color: #b45309; // marrón/naranja para subtítulo
+  }
+
+  button {
+    margin-top: 0.5rem;
+    background-color: #d97706;
+    color: white;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+
+    &:hover {
+      background-color: #b45309;
+    }
+  }
+}
+
 // @media (min-width: 768px) {
 //   .mapContainer {
 //     flex: 1;

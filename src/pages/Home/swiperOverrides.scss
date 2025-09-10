@@ -4,17 +4,17 @@
 }
 
 .swiper-button-next {
-  transform: translateX(20px);
   display: none;
 }
 
 .swiper-button-prev {
-  transform: translateX(-20px);
   display: none;
 }
 
 .swiper-pagination {
-  transform: translateY(30px);
+  position: absolute;
+  z-index: 300;
+  transform: translateY(15px);
 }
 
 .swiper-pagination-bullet-active {
@@ -22,8 +22,8 @@
 }
 
 .swiper-wrapper {
-  display: flex;
-  justify-content: center; /* centra horizontalmente los slides */
+  padding: 1rem 0;
+  margin: 0 auto;
 }
 
 @media (min-width: 1024px) {

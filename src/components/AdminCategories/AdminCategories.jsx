@@ -1,12 +1,12 @@
 import { useBusiness } from "../../context/BusinessContext";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Modal from "../../components/Modal/Modal";
 import styles from "./AdminCategories.module.scss";
 import EmojiPicker from "emoji-picker-react";
 import { FaTrashAlt } from "react-icons/fa";
 
 const AdminCategories = () => {
-  const { refresh, editCategory, categories, removeCategory, addCategory } = useBusiness();
+  const { editCategory, categories, removeCategory, addCategory } = useBusiness();
 
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState(null);
@@ -16,9 +16,6 @@ const AdminCategories = () => {
   const [showPicker, setShowPicker] = useState(false);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    refresh();
-  }, []);
 
   const handleCategoryEdit = (cat) => {
     setEditingCategory(cat);
@@ -80,7 +77,6 @@ const AdminCategories = () => {
 
       <ul className={styles.ul}>
         {categories.map((cat) => (
-          console.log(categories),
           <li key={cat.id} className={styles.li} onClick={() => handleCategoryEdit(cat)}>
             <span>{cat.icon}</span>
             <p>{cat.name}</p>

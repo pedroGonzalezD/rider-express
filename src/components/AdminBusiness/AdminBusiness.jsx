@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./AdminBusiness.module.scss";
 import { useBusiness } from "../../context/BusinessContext";
 import { IoMdAdd } from "react-icons/io";
@@ -20,7 +20,12 @@ const AdminBusiness = () => {
     addBusiness,
     editBusiness,
     deleteBusiness,
+    setActiveFilters,
+    query,
+    setQuery,
     addCategory,
+    hasMore,
+    loadMore,
   } = useBusiness();
 
   const { t } = useTranslation();
@@ -48,8 +53,21 @@ const AdminBusiness = () => {
     setDeleteModalOpen(true);
   };
 
+  useEffect(() =>{
+    setActiveFilters((prev) => ({ ...prev, category: [] }))
+    setQuery("")
+  }, [])
+
   return (
     <>
+      <input
+        type="text"
+        placeholder={t("common.search")}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        className={styles.search}
+      />
+
       <div className={styles.cont}>
         <h3 className={styles.title}>{t("common.businessManage")}</h3>
         <button
@@ -63,8 +81,8 @@ const AdminBusiness = () => {
       <ul className={styles.ul}>
         {businesses.map((b) => (
           <li
-            className={styles.li}
             key={b.id}
+            className={styles.li}
             onClick={() => { setEditingBusiness(b); setOpenModal(true); }}
           >
             <div className={styles.imgCont}>
@@ -81,21 +99,15 @@ const AdminBusiness = () => {
               <p className={styles.p}>
                 <span>{t("common.schedule")}</span>: {b.hours?.open} - {b.hours?.close}
               </p>
-             <p className={styles.p}>
-              <span>{t("common.categories")}</span>:{" "}
-              {b.categories
-                ?.map(catId => categories.find(c => c.id === catId)?.name)
-                .filter(Boolean)
-                .join(", ")}
-            </p>
+              <p className={styles.p}>
+                <span>{t("common.categories")}</span>:{" "}
+                {b.categories?.map(catId => categories.find(c => c.id === catId)?.name).filter(Boolean).join(", ")}
+              </p>
             </div>
-            <div className={styles.del} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.del}>
               <button
                 className={styles.delete}
-                onClick={(e) => {
-                  confirmDelete(b);
-                  e.stopPropagation();
-                }}
+                onClick={(e) => { confirmDelete(b); e.stopPropagation(); }}
               >
                 <FaTrashAlt />
               </button>
@@ -103,6 +115,18 @@ const AdminBusiness = () => {
           </li>
         ))}
       </ul>
+
+      {businesses.length === 0 && (
+        <p style={{ textAlign: "center" }}>No hay negocios disponibles</p>
+      )}
+
+      {hasMore && (
+        <div style={{ textAlign: "center", margin: "1rem 0" }}>
+          <button onClick={loadMore} className={styles.loadMore}>
+            {t("common.loadMore")}
+          </button>
+        </div>
+      )}
 
       <Modal
         isOpen={openModal}

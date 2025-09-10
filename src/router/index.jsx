@@ -6,6 +6,7 @@ import AdminPage from "../pages/AdminPage/AdminPage";
 import ProtectRoute from "../pages/protectRoute/ProtectRoute";
 import AdminBusiness from "../components/AdminBusiness/AdminBusiness"
 import AdminCategories from "../components/AdminCategories/AdminCategories";
+import AdminBanners from "../components/AdminBanners/AdminBanners";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
@@ -43,7 +44,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: "discounts",
-                element: <div>Vuelva pronto caballero</div>
+                element: <AdminBanners/>
               }
             ]
           }

@@ -67,9 +67,6 @@ export default function ImageCropper({ image, onComplete, onCancel }) {
   }, []);
 
   useEffect(() => {
-    // Si la imagen viene como File o Blob y te llega un object URL, todo bien.
-    // Si viene como URL remota (Cloudinary), no hay que hacer nada especial aquí.
-    // El ajuste de zoom inicial lo dejamos en 1 para evitar “saltos”.
     setZoom(1);
   }, [image]);
 

@@ -1,4 +1,3 @@
-// services/categoryService.js
 import { db } from "../firebase.js";
 import {
   collection,
@@ -19,12 +18,12 @@ export async function createCategory(name, icon) {
   return { id: ref.id, name, icon };
 }
 
-export async function removeCategory(id) {
-  await deleteDoc(doc(db, "categories", id));
+export async function editCategory(id, patch) {
+  await updateDoc(doc(db, "categories", id), patch);
   return true;
 }
 
-export async function editCategory(id, patch) {
-  await updateDoc(doc(db, "categories", id), patch);
+export async function removeCategory(id) {
+  await deleteDoc(doc(db, "categories", id));
   return true;
 }
